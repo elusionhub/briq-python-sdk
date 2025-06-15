@@ -82,12 +82,9 @@ class BaseService:
         """
         try:
             if is_paginated:
-                # Parse paginated response
                 return PaginatedResponse[model_class].model_validate(response_data)
             elif is_list:
-                # Parse list response
                 if "data" in response_data:
-                    # Wrapped response
                     parsed_data = [
                         model_class.model_validate(item)
                         for item in response_data["data"]
@@ -99,7 +96,6 @@ class BaseService:
                         error=response_data.get("error"),
                     )
                 else:
-                    # Direct list response
                     parsed_data = [
                         model_class.model_validate(item) for item in response_data
                     ]
@@ -110,9 +106,7 @@ class BaseService:
                         error=None,
                     )
             else:
-                # Parse single item response
                 if "data" in response_data:
-                    # Wrapped response
                     parsed_data = model_class.model_validate(response_data["data"])
                     return APIResponse[model_class](
                         success=response_data.get("success", True),
@@ -121,7 +115,6 @@ class BaseService:
                         error=response_data.get("error"),
                     )
                 else:
-                    # Direct model response
                     parsed_data = model_class.model_validate(response_data)
                     return APIResponse[model_class](
                         success=True,
@@ -215,7 +208,7 @@ class BaseService:
 
         response_data = await self.http_client.get(url, params=query_params)
         return self._parse_response(
-            response_data, model_class, is_paginated=is_paginated
+            response_data, model_class, is_list=True, is_paginated=is_paginated
         )
 
     async def _create(

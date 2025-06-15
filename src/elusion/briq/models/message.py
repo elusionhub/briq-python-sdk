@@ -223,6 +223,20 @@ class MessageLog(BaseModel):
     logs: List[Log]
 
 
+class MessageHistory(BaseModel):
+    """Model for message history."""
+
+    message_id: str
+    user_id: str
+    recipient: List[str] | str | None
+    campaign_id: Optional[str] = None
+    channel_id: str
+    sender_id: str
+    content: str
+    status: str
+    sent_at: str | None
+
+
 class MessageListParams(BaseListParams):
     """Parameters for listing messages."""
 

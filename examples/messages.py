@@ -35,7 +35,17 @@ async def getMessageLogs():
             print(f"Failed to retrieve message logs: {e}")
 
 
+async def getMessageHistory():
+    async with Briq() as client:
+        try:
+            history = await client.messages.get_history()
+            print(history.model_dump_json(indent=2))
+        except Exception as e:
+            print(f"Failed to retrieve message history: {e}")
+
+
 if __name__ == "__main__":
     # asyncio.run(test_connection())
     # asyncio.run(sendMessage())
     asyncio.run(getMessageLogs())
+    # asyncio.run(getMessageHistory())

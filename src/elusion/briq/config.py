@@ -40,13 +40,12 @@ ENDPOINTS = {
     "create-workspace": "/workspace/create/",
     "update-workspace": "/workspace/update",
     "get-workspace": "/workspace",
-
     "messages": "/message",
     "messages-instant": "/message/send-instant",
-    "campaigns": "/campaign",
-    "messages-campaign": "/message/campaign",
     "messages-logs": "/message/logs",
     "messages-history": "/message/history",
+    "campaigns": "/campaign",
+    "messages-campaign": "/message/campaign",
 }
 
 

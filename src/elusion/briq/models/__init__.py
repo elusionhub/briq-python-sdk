@@ -22,7 +22,8 @@ from elusion.briq.models.message import (
     MessageLog,
     MessageLogParams,
     MessageStatus,
-    MessageResponse
+    MessageResponse,
+    MessageHistory
 )
 from elusion.briq.models.workspace import (
     Workspace,
@@ -58,4 +59,5 @@ __all__ = [
     "MessageLog",
     "MessageListParams",
     "MessageLogParams",
+    "MessageHistory",
 ]

@@ -7,6 +7,7 @@ from elusion.briq.models.message import (
     CampaignMessageCreate,
     InstantMessage,
     Message,
+    MessageHistory,
     MessageListParams,
     MessageLog,
     MessageLogParams,
@@ -94,7 +95,7 @@ class MessageService(BaseService):
 
     async def get_history(
         self, params: Union[MessageListParams, Dict[str, str], None] = None
-    ) -> APIResponse[List[Message]]:
+    ) -> APIResponse[List[MessageHistory]]:
         """Get message history.
 
         Args:
@@ -118,11 +119,11 @@ class MessageService(BaseService):
                 page=int(params.get("page", 1)) if params else 1,
                 limit=int(params.get("limit", 10)) if params else 10,
             )
-        return await self._list("messages_history", Message, params)
+        return await self._list("messages-history", MessageHistory, params)
 
     async def get_logs(
         self, params: Union[MessageLogParams, Dict[str, str], None] = None
-    ) -> APIResponse[List[MessageLog]]:
+    ) -> APIResponse[MessageLog]:
         """Get message logs for tracking delivery status.
 
         Args:
@@ -146,7 +147,7 @@ class MessageService(BaseService):
                 page=int(params.get("page", 1)) if params else 1,
                 limit=int(params.get("limit", 10)) if params else 10,
             )
-        return await self._list("messages-logs", MessageLog, params)
+        return await self._get("messages-logs", MessageLog)
 
     async def get_status(self, message_id: str) -> APIResponse[MessageStatus]:
         """Get the current status of a specific message.
