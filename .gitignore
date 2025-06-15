@@ -1,0 +1,88 @@
+# Python-specific
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+coverage.xml
+*.cover
+*.tox/
+htmlcov/
+nosetests.xml
+junit.xml
+
+# Build and distribution
+build/
+dist/
+*.egg
+*.egg-info/
+sdist/
+*.whl
+*.tar.gz
+
+# Dependency management
+.pipenv/
+Pipfile.lock
+poetry.lock
+
+# Documentation
+docs/_build/
+docs/build/
+
+# Environment and secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+secrets.json
+credentials.json
+*.pem
+*.key
+*.crt
+
+# Logs and runtime data
+*.log
+logs/
+*.pid
+*.seed
+*.dat
+*.out
+*.bak
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Project-specific (optional, adjust as needed)
+# Example: cached API responses or temporary files
+cache/
+tmp/
+temp/
+*.cache
