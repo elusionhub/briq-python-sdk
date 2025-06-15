@@ -4,7 +4,7 @@ from typing import Dict, List, Union
 
 from elusion.briq.models.common import APIResponse
 from elusion.briq.models.message import (
-    CampaignMessageCreate,
+    CampaignMessage,
     InstantMessage,
     Message,
     MessageHistory,
@@ -62,7 +62,7 @@ class MessageService(BaseService):
         return self._parse_response(response_data, MessageResponse)
 
     async def send_campaign(
-        self, message_data: Union[CampaignMessageCreate, Dict[str, str]]
+        self, message_data: Union[CampaignMessage, Dict[str, str]]
     ) -> APIResponse[Dict[str, Union[str, int]]]:
         """Send a message via campaign.
 
@@ -82,13 +82,13 @@ class MessageService(BaseService):
             ...     })
             ...     print(f"Messages sent: {response.data['messages_sent']}")
         """
-        url = self._build_url("messages_campaign")
+        url = self._build_url("messages-campaign")
         serialized_data = self._validate_and_serialize(message_data)
 
         response_data = await self.http_client.post(url, data=serialized_data)
         return APIResponse[Dict[str, Union[str, int]]](
             success=response_data.get("success", True),
-            data=response_data.get("data", {}),
+            data=response_data,
             message=response_data.get("message"),
             error=response_data.get("error"),
         )
@@ -212,7 +212,7 @@ class MessageService(BaseService):
             return self._parse_response(response_data, Message)
 
     def send_campaign_sync(
-        self, message_data: Union[CampaignMessageCreate, Dict[str, str]]
+        self, message_data: Union[CampaignMessage, Dict[str, str]]
     ) -> APIResponse[Dict[str, Union[str, int]]]:
         """Send a message via campaign (sync version).
 

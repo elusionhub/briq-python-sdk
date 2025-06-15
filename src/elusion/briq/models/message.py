@@ -83,7 +83,7 @@ class MessageResponse(BaseModel):
     )
 
 
-class CampaignMessageCreate(MessageBase):
+class CampaignMessage(MessageBase):
     """Model for creating campaign messages."""
 
     campaign_id: str = Field(..., description="Campaign ID")

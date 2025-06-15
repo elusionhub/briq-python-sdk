@@ -1,5 +1,5 @@
 from elusion.briq import Briq
-from elusion.briq.models.message import InstantMessage
+from elusion.briq.models.message import CampaignMessage, InstantMessage
 import asyncio
 
 
@@ -44,8 +44,24 @@ async def getMessageHistory():
             print(f"Failed to retrieve message history: {e}")
 
 
+async def sendCampaignMessage():
+    async with Briq() as client:
+        message_data = CampaignMessage(
+            campaign_id="12345678-1234-1234-1234-123456789012",
+            group_id="group-123",
+            content="Hello, this is a test campaign message!",
+            sender_id="BRIQ",
+        )
+        try:
+            response = await client.messages.send_campaign(message_data)
+            print(response.model_dump_json(indent=2))
+        except Exception as e:
+            print(f"Failed to send campaign message: {e}")
+
+
 if __name__ == "__main__":
     # asyncio.run(test_connection())
     # asyncio.run(sendMessage())
-    asyncio.run(getMessageLogs())
+    # asyncio.run(getMessageLogs())
     # asyncio.run(getMessageHistory())
+    asyncio.run(sendCampaignMessage())

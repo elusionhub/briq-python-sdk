@@ -15,7 +15,7 @@ from elusion.briq.models.common import (
     ValidationError,
 )
 from elusion.briq.models.message import (
-    CampaignMessageCreate,
+    CampaignMessage,
     InstantMessage,
     Message,
     MessageListParams,
@@ -54,7 +54,7 @@ __all__ = [
     "Message",
     "InstantMessage",
     "MessageResponse",
-    "CampaignMessageCreate",
+    "CampaignMessage",
     "MessageStatus",
     "MessageLog",
     "MessageListParams",
