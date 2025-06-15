@@ -49,7 +49,7 @@ def chunk_list(items: List[T], chunk_size: int) -> List[List[T]]:
     if chunk_size <= 0:
         raise ValueError("Chunk size must be positive")
 
-    return [items[i: i + chunk_size] for i in range(0, len(items), chunk_size)]
+    return [items[i : i + chunk_size] for i in range(0, len(items), chunk_size)]
 
 
 def format_phone_for_display(phone: str) -> str:
@@ -92,7 +92,7 @@ def format_phone_for_display(phone: str) -> str:
         if len(digits) > 4:
             country_code = digits[:4]
             rest = digits[4:]
-            formatted_rest = " ".join([rest[i: i + 3] for i in range(0, len(rest), 3)])
+            formatted_rest = " ".join([rest[i : i + 3] for i in range(0, len(rest), 3)])
             return f"{country_code} {formatted_rest}"
         else:
             return digits

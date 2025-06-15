@@ -45,7 +45,6 @@ ENDPOINTS = {
     "messages-logs": "/message/logs",
     "messages-history": "/message/history",
     "messages-campaign": "/message/send-campaign",
-
     "create-campaign": "/campaign/create/",
     "all-campaigns": "/campaign/all/",
     "get-campaign": "/campaign",

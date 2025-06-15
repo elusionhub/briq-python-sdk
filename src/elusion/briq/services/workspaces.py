@@ -100,7 +100,9 @@ class WorkspaceService(BaseService):
             ...     )
             ...     print(f"Updated: {updated_workspace.data.name}")
         """
-        return await self._update("update-workspace", workspace_id, workspace_data, Workspace)
+        return await self._update(
+            "update-workspace", workspace_id, workspace_data, Workspace
+        )
 
     async def delete(self, workspace_id: str) -> APIResponse[Dict[str, bool]]:
         """Delete a workspace.

@@ -2,3 +2,8 @@ pydantic
 python-dotenv
 httpx
 asyncio
+twine
+build
+setuptools
+ginx
+flake8

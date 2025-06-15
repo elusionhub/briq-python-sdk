@@ -23,7 +23,7 @@ from elusion.briq.models.message import (
     MessageLogParams,
     MessageStatus,
     MessageResponse,
-    MessageHistory
+    MessageHistory,
 )
 from elusion.briq.models.workspace import (
     Workspace,

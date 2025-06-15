@@ -109,7 +109,9 @@ class CampaignService(BaseService):
             ...     )
             ...     print(f"Updated: {updated_campaign.data.name}")
         """
-        return await self._update("update-campaign", campaign_id, campaign_data, Campaign)
+        return await self._update(
+            "update-campaign", campaign_id, campaign_data, Campaign
+        )
 
     async def delete(self, campaign_id: str) -> APIResponse[Dict[str, bool]]:
         """Delete a campaign.

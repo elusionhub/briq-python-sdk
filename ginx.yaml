@@ -1,0 +1,64 @@
+# Ginx Configuration File
+
+# Scripts
+scripts:
+  # Development
+  install-dev:
+    command: python -m pip install -e .
+    description: Install the package in editable mode with development dependencies
+
+  # Installation
+  upgrade-pip:
+    command: python -m pip install --upgrade pip
+    description: Upgrade pip to latest version
+
+  install-requirements:
+    command: python -m pip install -r requirements.txt
+    description: Install dependencies from requirements.txt
+
+  # Code Quality
+  lint:
+    command: python -m flake8 src/
+    description: Run flake8 linter on the source code
+
+  format:
+    command: python -m black src/
+    description: Format the source code using Black
+
+  # Installing build tools
+  install-build:
+    command: python -m pip install --upgrade build
+    description: Install build tools for packaging Python projects
+
+  install-twine:
+    command: python -m pip install --upgrade twine
+    description: Install Twine for uploading packages to PyPI
+
+  # Cleaning up
+  clean:
+    command: rm -rf build/ dist/ *.egg-info
+    description: Clean up build artifacts
+
+  # Build and upload package
+  build-package:
+    command: python -m build
+    description: Build the Python package
+    depends:
+      - clean
+      - install-twine
+      - install-build
+
+  upload-package:
+    command: python -m twine upload dist/*
+    description: Upload the built package to PyPI
+    depends:
+      - build-package
+
+# Plugins
+plugins:
+  enabled:
+    - version-sync
+
+# Settings
+settings:
+  dangerous_commands: true

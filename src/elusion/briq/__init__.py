@@ -17,7 +17,12 @@ from elusion.briq.exceptions import (
     BriqNetworkError,
 )
 from elusion.briq.models.campaign import Campaign, NewCampaign, UpdateCampaign
-from elusion.briq.models.message import Message, InstantMessage, MessageLog, MessageStatus
+from elusion.briq.models.message import (
+    Message,
+    InstantMessage,
+    MessageLog,
+    MessageStatus,
+)
 from elusion.briq.models.workspace import Workspace, WorkspaceCreate, WorkspaceUpdate
 
 __all__ = [

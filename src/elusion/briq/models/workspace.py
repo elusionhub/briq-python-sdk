@@ -81,6 +81,7 @@ class WorkspaceUpdate(BaseModel):
 
 class Workspace(WorkspaceBase):
     """Complete workspace model with all fields."""
+
     user_id: Optional[str] = Field(
         None, description="ID of the user who created the workspace"
     )
