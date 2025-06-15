@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "elusion-briq"
+name = "elusion-briq-sdk"
 dynamic = ["version"]
 description = "A modern Python SDK for the Briq SMS API"
 readme = "README.md"
