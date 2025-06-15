@@ -35,7 +35,7 @@ class CampaignBase(BaseModel):
         return v
 
 
-class CampaignCreate(CampaignBase):
+class NewCampaign(CampaignBase):
     """Model for creating a new campaign."""
 
     launch_date: Optional[Union[datetime, str]] = Field(
@@ -43,7 +43,7 @@ class CampaignCreate(CampaignBase):
     )
 
     @field_validator("launch_date", mode="before")
-    def parse_launch_date(cls, v: Union[str, datetime, None]) -> Union[datetime, None]:
+    def parse_launch_date(cls, v: Union[str, datetime, None]) -> Optional[datetime]:
         """Parse launch date from string if necessary."""
         if isinstance(v, str):
             try:
@@ -59,8 +59,14 @@ class CampaignCreate(CampaignBase):
             raise ValueError("Launch date must be in the future")
         return v
 
-    class Config:
-        json_schema_extra = {
+    def model_dump(self, **kwargs: Any) -> Dict[str, Any]:
+        data = super().model_dump(**kwargs)
+        if isinstance(data.get("launch_date"), datetime):
+            data["launch_date"] = data["launch_date"].isoformat()
+        return data
+
+    model_config = {
+        "json_schema_extra": {
             "example": {
                 "name": "Summer Sale Campaign",
                 "description": "Promotional campaign for summer sale",
@@ -68,9 +74,10 @@ class CampaignCreate(CampaignBase):
                 "launch_date": "2025-07-01T10:00:00Z",
             }
         }
+    }
 
 
-class CampaignUpdate(BaseModel):
+class UpdateCampaign(BaseModel):
     """Model for updating an existing campaign."""
 
     name: Optional[str] = Field(
@@ -79,13 +86,9 @@ class CampaignUpdate(BaseModel):
     description: Optional[str] = Field(
         None, max_length=1000, description="Campaign description"
     )
-    workspace_id: Optional[str] = Field(
-        None, description="ID of the workspace this campaign belongs to"
-    )
     launch_date: Optional[Union[datetime, str]] = Field(
         None, description="Scheduled launch date for the campaign"
     )
-    status: Optional[str] = Field(None, description="Campaign status")
 
     @field_validator("name")
     def validate_name(cls, v: Optional[str]) -> Optional[str]:
@@ -114,14 +117,11 @@ class CampaignUpdate(BaseModel):
                 raise ValueError(f"Invalid launch date format: {v}")
         return v
 
-    @field_validator("status")
-    def validate_status(cls, v: Optional[str]) -> Optional[str]:
-        """Validate campaign status."""
-        if v is not None and v not in CAMPAIGN_STATUSES:
-            raise ValueError(
-                f"Invalid status. Must be one of: {', '.join(CAMPAIGN_STATUSES)}"
-            )
-        return v
+    def model_dump(self, **kwargs: Any) -> Dict[str, Any]:
+        data = super().model_dump(**kwargs)
+        if isinstance(data.get("launch_date"), datetime):
+            data["launch_date"] = data["launch_date"].isoformat()
+        return data
 
     class Config:
         json_schema_extra = {
@@ -129,7 +129,6 @@ class CampaignUpdate(BaseModel):
                 "name": "Updated Campaign Name",
                 "description": "Updated campaign description",
                 "launch_date": "2025-07-15T10:00:00Z",
-                "status": "scheduled",
             }
         }
 
@@ -137,14 +136,10 @@ class CampaignUpdate(BaseModel):
 class Campaign(CampaignBase):
     """Complete campaign model with all fields."""
 
+    campaign_id: Optional[str]
+
     launch_date: Optional[datetime] = Field(None, description="Scheduled launch date")
     status: str = Field("draft", description="Current campaign status")
-
-    messages_sent: Optional[int] = Field(0, description="Number of messages sent")
-    messages_delivered: Optional[int] = Field(
-        0, description="Number of messages delivered"
-    )
-    messages_failed: Optional[int] = Field(0, description="Number of failed messages")
 
     @field_validator("status")
     def validate_status(cls, v: str) -> str:
@@ -164,9 +159,6 @@ class Campaign(CampaignBase):
                 "workspace_id": "466e6a77-6f38-4b51-afbb-4b63ebf4ff43",
                 "launch_date": "2025-07-01T10:00:00Z",
                 "status": "scheduled",
-                "messages_sent": 1500,
-                "messages_delivered": 1425,
-                "messages_failed": 75,
                 "created_at": "2025-06-15T10:00:00Z",
                 "updated_at": "2025-06-15T12:30:00Z",
             }

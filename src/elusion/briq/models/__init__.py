@@ -2,9 +2,9 @@
 
 from elusion.briq.models.campaign import (
     Campaign,
-    CampaignCreate,
+    NewCampaign,
     CampaignListParams,
-    CampaignUpdate,
+    UpdateCampaign,
 )
 from elusion.briq.models.common import (
     APIResponse,
@@ -47,8 +47,8 @@ __all__ = [
     "WorkspaceListParams",
     # Campaign models
     "Campaign",
-    "CampaignCreate",
-    "CampaignUpdate",
+    "NewCampaign",
+    "UpdateCampaign",
     "CampaignListParams",
     # Message models
     "Message",

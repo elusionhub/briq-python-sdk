@@ -4,9 +4,9 @@ from typing import Dict, List, Union
 
 from elusion.briq.models.campaign import (
     Campaign,
-    CampaignCreate,
+    NewCampaign,
     CampaignListParams,
-    CampaignUpdate,
+    UpdateCampaign,
 )
 from elusion.briq.models.common import APIResponse
 from elusion.briq.services.base import BaseService
@@ -17,7 +17,7 @@ class CampaignService(BaseService):
 
     # Async methods
     async def create(
-        self, campaign_data: Union[CampaignCreate, Dict[str, str]]
+        self, campaign_data: Union[NewCampaign, Dict[str, str]]
     ) -> APIResponse[Campaign]:
         """Create a new campaign.
 
@@ -37,7 +37,7 @@ class CampaignService(BaseService):
             ...     })
             ...     print(f"Created campaign: {campaign.data.id}")
         """
-        return await self._create("campaigns", campaign_data, Campaign)
+        return await self._create("create-campaign", campaign_data, Campaign)
 
     async def list(
         self, params: Union[CampaignListParams, Dict[str, str], None] = None
@@ -65,7 +65,7 @@ class CampaignService(BaseService):
                 page=int(params.get("page", 1)) if params else 1,
                 limit=int(params.get("limit", 10)) if params else 10,
             )
-        return await self._list("campaigns", Campaign, params)
+        return await self._list("all-campaigns", Campaign, params)
 
     async def get_by_id(self, campaign_id: str) -> APIResponse[Campaign]:
         """Get a campaign by its ID.
@@ -83,10 +83,10 @@ class CampaignService(BaseService):
             ...     print(f"Status: {campaign.data.status}")
             ...     print(f"Delivery rate: {campaign.data.delivery_rate}%")
         """
-        return await self._get("campaigns", Campaign, campaign_id)
+        return await self._get("get-campaign", Campaign, campaign_id)
 
     async def update(
-        self, campaign_id: str, campaign_data: Union[CampaignUpdate, Dict[str, str]]
+        self, campaign_id: str, campaign_data: Union[UpdateCampaign, Dict[str, str]]
     ) -> APIResponse[Campaign]:
         """Update an existing campaign.
 
@@ -109,7 +109,7 @@ class CampaignService(BaseService):
             ...     )
             ...     print(f"Updated: {updated_campaign.data.name}")
         """
-        return await self._update("campaigns", campaign_id, campaign_data, Campaign)
+        return await self._update("update-campaign", campaign_id, campaign_data, Campaign)
 
     async def delete(self, campaign_id: str) -> APIResponse[Dict[str, bool]]:
         """Delete a campaign.
@@ -177,7 +177,7 @@ class CampaignService(BaseService):
 
     # Sync methods
     def create_sync(
-        self, campaign_data: Union[CampaignCreate, Dict[str, str]]
+        self, campaign_data: Union[NewCampaign, Dict[str, str]]
     ) -> APIResponse[Campaign]:
         """Create a new campaign (sync version).
 
@@ -220,7 +220,7 @@ class CampaignService(BaseService):
         return self._get_sync("campaigns", Campaign, campaign_id)
 
     def update_sync(
-        self, campaign_id: str, campaign_data: Union[CampaignUpdate, Dict[str, str]]
+        self, campaign_id: str, campaign_data: Union[UpdateCampaign, Dict[str, str]]
     ) -> APIResponse[Campaign]:
         """Update an existing campaign (sync version).
 

@@ -16,7 +16,7 @@ from elusion.briq.exceptions import (
     BriqValidationError,
     BriqNetworkError,
 )
-from elusion.briq.models.campaign import Campaign, CampaignCreate, CampaignUpdate
+from elusion.briq.models.campaign import Campaign, NewCampaign, UpdateCampaign
 from elusion.briq.models.message import Message, InstantMessage, MessageLog, MessageStatus
 from elusion.briq.models.workspace import Workspace, WorkspaceCreate, WorkspaceUpdate
 
@@ -32,8 +32,8 @@ __all__ = [
     "BriqNetworkError",
     # Models
     "Campaign",
-    "CampaignCreate",
-    "CampaignUpdate",
+    "NewCampaign",
+    "UpdateCampaign",
     "Message",
     "InstantMessage",
     "MessageLog",
