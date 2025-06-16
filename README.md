@@ -14,7 +14,7 @@ poetry add briq-sdk
 
 ```python
 import asyncio
-from briq import Briq
+from elusion.briq import Briq
 
 async def main():
     async with Briq(api_key="your-api-key") as client:
@@ -98,7 +98,7 @@ async with Briq() as client:
 ## Configuration
 
 ```python
-from briq import Briq
+from elusion.briq import Briq
 
 # Basic initialization
 client = Briq(api_key="your-api-key")
@@ -121,7 +121,7 @@ client = Briq(
 
 ```python
 import asyncio
-from briq import Briq
+from elusion.briq import Briq
 
 async def main():
     async with Briq() as client:
@@ -138,7 +138,7 @@ asyncio.run(main())
 ### Sync (Alternative)
 
 ```python
-from briq import Briq
+from elusion.briq import Briq
 
 with Briq() as client:
     response = client.messages.send_instant_sync({
@@ -152,7 +152,7 @@ with Briq() as client:
 ## Error Handling
 
 ```python
-from briq import Briq, BriqAPIError, BriqRateLimitError
+from elusion.briq import Briq, BriqAPIError, BriqRateLimitError
 
 async with Briq() as client:
     try:

@@ -20,7 +20,7 @@ class BriqClient:
     Examples:
         >>> # Async usage (recommended)
         >>> import asyncio
-        >>> from briq import Briq
+        >>> from elusion.briq import Briq
         >>>
         >>> async def main():
         ...     async with Briq(api_key="your-api-key") as client:
@@ -39,7 +39,7 @@ class BriqClient:
         >>> asyncio.run(main())
 
         >>> # Sync usage
-        >>> from briq import Briq
+        >>> from elusion.briq import Briq
         >>>
         >>> with Briq(api_key="your-api-key") as client:
         ...     workspaces = client.workspaces.list_sync()
