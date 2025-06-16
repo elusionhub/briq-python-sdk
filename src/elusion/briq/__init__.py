@@ -3,7 +3,7 @@
 A modern Python SDK for the Briq SMS API with full async support and type safety.
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __author__ = "Elution Hub"
 __email__ = "elusion.lab@gmail.com"
 
