@@ -159,7 +159,7 @@ class BriqClient:
             return False
 
         except Exception as e:
-            logger.error(f"Health check failed: {e}")
+            logger.error(f"Connection Test Failed: {e}")
             return False
 
     def test_connection_sync(self) -> bool:
@@ -175,7 +175,7 @@ class BriqClient:
             ...         print("Successfully connected to Briq API")
         """
         try:
-            url = self.config.get_endpoint_url("health")
+            url = self.config.get_endpoint_url("all-workspaces")
             response_data: Dict[str, Any] = self.http_client.get_sync(url)
             if not response_data:
                 return False
@@ -185,7 +185,7 @@ class BriqClient:
             return False
 
         except Exception as e:
-            logger.error(f"Health check failed: {e}")
+            logger.error(f"Connection Test Failed: {e}")
             return False
 
     async def close(self) -> None:
@@ -197,7 +197,6 @@ class BriqClient:
             >>> await client.close()  # Clean up when done
         """
         await self.http_client.close()
-        logger.info("Briq client closed")
 
     def close_sync(self) -> None:
         """Close the HTTP client and clean up resources (sync version).
@@ -208,7 +207,6 @@ class BriqClient:
             >>> client.close_sync()  # Clean up when done
         """
         self.http_client.close_sync()
-        logger.info("Briq client closed")
 
 
 Briq = BriqClient
