@@ -69,6 +69,9 @@ Repository = "https://github.com/elusionhub/briq-python-sdk.git"
 Issues = "https://github.com/elusionhub/briq-python-sdk/issues"
 Changelog = "https://github.com/elusionhub/briq-python-sdk/blob/main/CHANGELOG.md"
 
+[tool.hatch.version]
+path = "src/elusion/briq/__init__.py"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/elusion"]
 
@@ -175,6 +178,7 @@ keep-runtime-typing = true
 
 [tool.bumpversion]
 current_version = "0.0.2"
+files = "src/elusion/briq/__init__.py"
 commit = true
 tag = true
 tag_name = "{new_version}"
