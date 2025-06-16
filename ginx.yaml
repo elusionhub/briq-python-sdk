@@ -54,6 +54,19 @@ scripts:
     depends:
       - build-package
 
+  # Versioning
+  patch:
+    command: bump-my-version bump patch
+    description: Bump the patch version of the package
+
+  minor:
+    command: bump-my-version bump minor
+    description: Bump the minor version of the package
+
+  major:
+    command: bump-my-version bump major
+    description: Bump the major version of the package
+
 # Plugins
 plugins:
   enabled:
