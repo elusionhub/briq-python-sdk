@@ -69,14 +69,11 @@ Repository = "https://github.com/elusionhub/briq-python-sdk.git"
 Issues = "https://github.com/elusionhub/briq-python-sdk/issues"
 Changelog = "https://github.com/elusionhub/briq-python-sdk/blob/main/CHANGELOG.md"
 
-[tool.hatch.version]
-path = "src/elusion/briq/__init__.py"
-
 [tool.hatch.build.targets.wheel]
-packages = ["src/elusion/briq"]
+packages = ["src/elusion"]
 
 [tool.hatch.build]
-include = ["src/elusion/briq"]
+include = ["src/elusion"]
 
 [tool.setuptools.package-data]
 "briq" = ["py.typed"]
@@ -103,7 +100,7 @@ markers = [
 asyncio_mode = "auto"
 
 [tool.coverage.run]
-source = ["src/briq"]
+source = ["src/elusion/briq"]
 omit = ["*/tests/*", "*/examples/*", "*/__init__.py"]
 
 [tool.coverage.report]
@@ -175,3 +172,12 @@ ban-relative-imports = "all"
 
 [tool.ruff.pyupgrade]
 keep-runtime-typing = true
+
+[tool.bumpversion]
+current_version = "0.0.1"
+commit = true
+tag = true
+tag_name = "{new_version}"
+message = "Bump version: {current_version} → {new_version}"
+
+[tool.bumpversion.file."src/elusion/briq/__init__.py"]
