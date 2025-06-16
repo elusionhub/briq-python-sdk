@@ -178,10 +178,10 @@ keep-runtime-typing = true
 
 [tool.bumpversion]
 current_version = "0.0.1"
-files = "src/elusion/briq/__init__.py"
 commit = true
 tag = true
 tag_name = "{new_version}"
 message = "Bump version: {current_version} → {new_version}"
 
-[tool.bumpversion.file."src/elusion/briq/__init__.py"]
+[[tool.bumpversion.files]]
+filename = "src/elusion/briq/__init__.py"
